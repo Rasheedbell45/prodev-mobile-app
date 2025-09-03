@@ -1,118 +1,102 @@
-import { StyleSheet } from "react-native";
+import { useState } from "react";
+import { useRouter } from "expo-router";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from "react-native";
+
+export default function SignIn() {
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSignIn = () => {
+    if (!email || !password) {
+      Alert.alert("Error", "Please enter both email and password");
+      return;
+    }
+
+    // 🔑 TODO: Replace with your authentication logic
+    if (email === "test@example.com" && password === "123456") {
+      Alert.alert("Success", "Signed in successfully!");
+      router.push("/"); // Redirect to home screen
+    } else {
+      Alert.alert("Error", "Invalid credentials");
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Welcome Back 👋</Text>
+      <Text style={styles.subtitle}>Sign in to continue</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Email"
+        keyboardType="email-address"
+        autoCapitalize="none"
+        value={email}
+        onChangeText={setEmail}
+      />
+
+      <TextInput
+        style={styles.input}
+        placeholder="Password"
+        secureTextEntry
+        value={password}
+        onChangeText={setPassword}
+      />
+
+      <TouchableOpacity style={styles.button} onPress={handleSignIn}>
+        <Text style={styles.buttonText}>Sign In</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => router.push("/signup")}>
+        <Text style={styles.link}>Don’t have an account? Sign Up</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    backgroundColor: '#fff',
-    position: 'relative'
+    justifyContent: "center",
+    padding: 24,
+    backgroundColor: "#fff",
   },
-  navGroup: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 20,
-    marginTop: 11
+  title: {
+    fontSize: 28,
+    fontWeight: "700",
+    marginBottom: 8,
+    textAlign: "center",
   },
-  largeText: {
-    fontSize: 40,
-    fontWeight: 700,
+  subtitle: {
+    fontSize: 16,
+    color: "#666",
+    marginBottom: 24,
+    textAlign: "center",
   },
-  smallText: {
-    fontSize: 12,
-    color: '#7E7B7B'
-  },
-  placeholderText: {
-    fontSize: 18,
-    color: '#7E7B7B',
-    marginBottom: 7
-  },
-  inputField: {
+  input: {
     borderWidth: 1,
-    borderRadius: 10,
-    height: 50,
-    borderColor: '#7E7B7B',
-    paddingHorizontal: 10
-  },
-  passwordGroup: {
-    flexDirection: 'row',
-    borderWidth: 1,
-    alignItems: 'center',
-    height: 50,
-    borderRadius: 10,
-    paddingHorizontal: 10,
-    borderColor: '#7e7b7b'
-  },
-  formGroup: {
-    marginTop: 44
-  },
-  forgotPasswordText: {
-    fontSize: 17,
-    marginTop: 9,
-    textAlign: 'right',
-    color: '#34967C'
+    borderColor: "#ccc",
+    borderRadius: 12,
+    padding: 14,
+    marginBottom: 16,
+    fontSize: 16,
   },
   button: {
-    backgroundColor: '#2B876E',
-    height: 53,
-    borderRadius: 10,
-    marginTop: 25,
-    justifyContent: 'center',
-    alignItems: 'center'
+    backgroundColor: "#2ecc71",
+    padding: 16,
+    borderRadius: 12,
+    alignItems: "center",
+    marginBottom: 12,
   },
   buttonText: {
-    fontSize: 17,
-    color: 'white'
-  },
-  socialMediaButton: {
-    borderWidth: 1,
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 10
-  },
-  socialMediaButtonText: {
+    color: "#fff",
     fontSize: 18,
-    color: '#0D0D0D',
-    fontWeight: 400
+    fontWeight: "600",
   },
-  socialMediaButtonGroup: {
-    gap: 15,
-    marginTop: 25
+  link: {
+    textAlign: "center",
+    color: "#2ecc71",
+    marginTop: 8,
   },
-  dividerGroup: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-    marginTop: 29
-  },
-  divider: {
-    borderWidth: 0.5,
-    borderColor: "#c2c2c2",
-    flex: 1
-  },
-  dividerText: {
-    fontSize: 17,
-    color: "#C2C2C2",
-  },
-  subTextGroup: {
-    flexDirection: 'row',
-    position: 'absolute',
-    bottom: 33,
-    left: 77,
-    right: 76
-  },
-  subText: {
-    fontSize: 18,
-    color: '#b5b5b5'
-  },
-  subTextJoin: {
-    fontSize: 18,
-    color: '#FFA800',
-    fontWeight: 600
-  }
 });
-
-
-export {
-  styles
-}
