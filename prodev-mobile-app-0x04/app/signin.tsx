@@ -13,7 +13,6 @@ export default function SignIn() {
       return;
     }
 
-    // 🔑 TODO: Replace with your authentication logic
     if (email === "test@example.com" && password === "123456") {
       Alert.alert("Success", "Signed in successfully!");
       router.push("/"); // Redirect to home screen
